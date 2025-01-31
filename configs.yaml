@@ -1,0 +1,16 @@
+params:
+  lr: 1e-3
+  batch_size: 256
+  epochs: 50
+  seed: 0
+
+paths:
+  checkpoint: ./chkpts
+  log: ./logs
+  plot: ./plots
+
+custom:
+  device: 0
+  device_ids: [0, 1, 2, 3]
+  num_channel: 2
+  num_class: 54
