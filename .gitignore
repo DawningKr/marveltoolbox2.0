@@ -3,3 +3,9 @@
 __pycache__/
 
 test.py
+
+marveltoolbox.egg-info/
+
+build/
+
+configs.yaml

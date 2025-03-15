@@ -10,20 +10,22 @@ class LoRA(ABC):
         pass
 
 
-class LoRAConfig(ABC):
+class LoRALayer(ABC):
     def __init__(self):
         self.rank = None
         self.alpha = None
         self.lora_A = None
         self.lora_B = None
         self.scale = None
+        self.bias = False
         self.enable_lora = False
 
     @abstractmethod
-    def set_lora_configs(self, rank, alpha):
+    def set_lora_configs(self, rank, alpha, bias=False):
         self.rank = rank
         self.alpha = alpha
-        self.scale = rank / alpha
+        self.scale = alpha / rank
+        self.bias = bias
 
     def set_lora_status(self, enable_lora: bool):
         self.enable_lora = enable_lora
