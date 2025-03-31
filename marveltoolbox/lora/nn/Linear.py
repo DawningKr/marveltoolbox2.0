@@ -1,3 +1,4 @@
+import math
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -5,16 +6,30 @@ from ..lora import LoRALayer
 
 
 class Linear(nn.Module, LoRALayer):
-    def __init__(self, in_features, out_features) -> None:
+    def __init__(self, in_features, out_features, bias=True) -> None:
         nn.Module.__init__(self)
         LoRALayer.__init__(self)
         self.in_features = in_features
         self.out_features = out_features
 
         self.weight = nn.Parameter(
-            torch.randn(out_features, in_features), requires_grad=True
+            torch.empty(out_features, in_features), requires_grad=True
         )
-        self.bias = nn.Parameter(torch.zeros(out_features), requires_grad=True)
+
+        if bias:
+            self.bias = nn.Parameter(torch.empty(out_features), requires_grad=True)
+        else:
+            self.register_parameter("bias", None)
+
+        self.reset_parameters()
+
+    def reset_parameters(self) -> None:
+        # Consistent with Pytorch source code
+        nn.init.kaiming_uniform_(self.weight, a=math.sqrt(5))
+        if self.bias is not None:
+            fan_in, _ = nn.init._calculate_fan_in_and_fan_out(self.weight)
+            bound = 1 / math.sqrt(fan_in) if fan_in > 0 else 0
+            nn.init.uniform_(self.bias, -bound, bound)
 
     def forward(self, x):
         if self.enable_lora:
