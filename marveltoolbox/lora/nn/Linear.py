@@ -51,4 +51,5 @@ class Linear(nn.Module, LoRALayer):
 
     def _set_params_status(self, freeze_params: bool):
         self.weight.requires_grad = not freeze_params
-        self.bias.requires_grad = not freeze_params
+        if self.bias is not None:
+            self.bias.requires_grad = not freeze_params

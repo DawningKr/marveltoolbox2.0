@@ -17,15 +17,13 @@ class LoRALayer(ABC):
         self.lora_A = None
         self.lora_B = None
         self.scale = None
-        self.bias = False
         self.enable_lora = False
 
     @abstractmethod
-    def set_lora_configs(self, rank, alpha, bias=False):
+    def set_lora_configs(self, rank, alpha):
         self.rank = rank
         self.alpha = alpha
         self.scale = alpha / rank
-        self.bias = bias
 
     def set_lora_status(self, enable_lora: bool):
         self.enable_lora = enable_lora

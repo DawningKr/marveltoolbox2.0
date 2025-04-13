@@ -46,7 +46,6 @@ class Conv2d(nn.Module, LoRALayer):
         else:
             self.register_parameter("bias", None)
 
-<<<<<<< HEAD
         self.reset_parameters()
 
     def reset_parameters(self):
@@ -78,20 +77,11 @@ class Conv2d(nn.Module, LoRALayer):
             x,
             weight,
             self.bias,
-=======
-    def set_lora_configs(self, rank, alpha, bias=False):
-        LoRALayer.set_lora_configs(self, rank, alpha, bias)
-        self.lora_A = nn.Conv2d(
-            self.in_channels,
-            rank,
-            self.kernel_size,
->>>>>>> faf5216a3c8649a79253ab2e6dc2a2880494132e
             stride=self.stride,
             padding=self.padding,
             dilation=self.dilation,
             groups=self.groups,
         )
-<<<<<<< HEAD
 
         return out
 
@@ -109,15 +99,6 @@ class Conv2d(nn.Module, LoRALayer):
 
         nn.init.normal_(self.lora_A)
         nn.init.zeros_(self.lora_B)
-=======
-        self.lora_B = nn.Conv2d(
-            rank, self.out_channels, kernel_size=1, stride=1, padding=0, bias=bias
-        )
-        nn.init.normal_(self.lora_A.weight)
-        nn.init.zeros_(self.lora_B.weight)
-        if bias:
-            nn.init.zeros_(self.lora_B.bias)
->>>>>>> faf5216a3c8649a79253ab2e6dc2a2880494132e
 
     def _set_params_status(self, freeze_params: bool):
         self.weight.requires_grad = not freeze_params
