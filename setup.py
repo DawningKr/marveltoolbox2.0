@@ -19,10 +19,10 @@ setup(
     name="marveltoolbox",
     version=version,
     packages=find_packages(),
-    author="Renjie Xie, DawningKr",
+    author="DawningKr, Renjie Xie, Wei Xu",
     maintainer="DawningKr",
     url="https://github.com/DawningKr/marveltoolbox2.0",
-    description="A toolbox for DL communication research.",
+    description="A toolbox for DL and communication research.",
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
@@ -32,7 +32,7 @@ setup(
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "Topic :: Utilities",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.11",
         "Environment :: Console",
         "Natural Language :: English",
         "Operating System :: OS Independent",
@@ -41,7 +41,7 @@ setup(
     "machine learning, supervised learning, "
     "unsupervised learning, communication, "
     "complex value matrix computation",
-    python_requires=">=3.8",
+    python_requires=">=3.11",
     platforms=["Linux"],
     # data_files=[('',['VERSION'])],
     include_package_data=True,
